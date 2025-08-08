@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electric Motor Rotor Temperature Predictor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f6f6f6;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .btn {
+            width: 100%;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Electric Motor Rotor Temperature Predictor</h2>
+    <form method="POST" action="/y_predict">
+        {% for feature in ['u_q', 'coolant', 'stator_winding', 'u_d', 'stator_tooth',
+                           'motor_speed', 'i_d', 'i_q', 'stator_yoke', 'torque'] %}
+            <div class="mb-3">
+                <label for="{{ feature }}" class="form-label">{{ feature.replace('_', ' ').title() }}:</label>
+                <input type="text" class="form-control" name="{{ feature }}" id="{{ feature }}" value="{{ request.form.get(feature, '') }}">
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Predict</button>
+    </form>
+    {% if prediction_text %}
+        <div class="result text-{{ 'danger' if '❌' in prediction_text else 'success' }}">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

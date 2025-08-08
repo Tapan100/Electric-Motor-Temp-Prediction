@@ -10,6 +10,11 @@ Permanent Magnet Synchronous Machines (PMSMs) are widely used in industrial, aut
 
 This ML-based Flask app allows users to input real-time motor parameters and get a predicted rotor temperature instantly.
 
+📁 Dataset
+
+The dataset used in this project can be downloaded from the following Google Drive link:
+👉[https://drive.google.com/file/d/1BK9NkjUG92qUBYvOFWfOKIJ16aRWvvsJ/view?usp=drive_link]
+
 ---
 
 ## 💡 Key Features
